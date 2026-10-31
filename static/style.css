@@ -1,0 +1,660 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+    --background: #100e11;
+    --panel: #19161b;
+    --border: #30252d;
+    --text: #f0e9ec;
+    --muted: #988b94;
+    --red: #b51f36;
+    --red-light: #e44b5f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 250px;
+    padding: 30px 20px;
+    background: #151216;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 55px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    background: var(--red);
+    border-radius: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+}
+
+.brand h2 {
+    margin: 0;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.brand p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.menu-label,
+.eyebrow {
+    color: var(--red-light);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.menu-label {
+    margin-bottom: 18px;
+}
+
+nav {
+    display: grid;
+    gap: 8px;
+}
+
+.nav-link {
+    padding: 13px 12px;
+    border-radius: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background: #302027;
+}
+
+.nav-link.active {
+    border-left: 3px solid var(--red-light);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    background: #65b88b;
+    border-radius: 50%;
+}
+
+
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-width: 0;
+    padding: 0 48px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+.topbar {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.classified {
+    color: var(--red-light);
+}
+
+.system-id {
+    color: var(--muted);
+}
+
+.welcome {
+    padding: 78px 0 65px;
+    background:
+        radial-gradient(ellipse at 85% 50%,
+            #49152255 0%, transparent 48%);
+}
+
+.eyebrow {
+    margin-bottom: 22px;
+}
+
+.welcome h1 {
+    max-width: 650px;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.15;
+}
+
+.welcome h1 span {
+    color: var(--red-light);
+}
+
+.description {
+    max-width: 470px;
+    margin: 22px 0 30px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 15px 19px;
+    background: var(--red);
+    border: 1px solid var(--red-light);
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.primary-button:hover {
+    background: #d12b45;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 23px 18px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
+
+.stat-card h2 {
+    margin: 22px 0 10px;
+    font-size: 32px;
+}
+
+.stat-card span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stat-card .security {
+    color: var(--red-light);
+    font-size: 20px;
+}
+
+.notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 22px;
+    background: #25181d;
+    border: 1px solid #49232d;
+    border-radius: 7px;
+}
+
+.notice-icon {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    background: #54212d;
+    border-radius: 50%;
+    color: #ff9aa8;
+}
+
+.notice h3 {
+    margin: 3px 0 10px;
+    font-size: 13px;
+}
+
+.notice p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+footer {
+    padding: 35px 0;
+    margin-top: 25px;
+    color: #70636b;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 850px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .brand {
+        margin-bottom: 25px;
+    }
+
+    .sidebar-footer {
+        margin-top: 25px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 0 22px;
+    }
+
+    .welcome {
+        padding: 50px 0;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        gap: 12px;
+        font-size: 9px;
+    }
+}
+
+.registration {
+    margin-top: 35px;
+    padding: 28px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.registration h2 {
+    margin: 12px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+}
+
+.form-description {
+    margin-bottom: 28px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.character-form {
+    display: grid;
+    gap: 20px;
+    max-width: 650px;
+}
+
+.form-group {
+    display: grid;
+    gap: 9px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px;
+    color: var(--text);
+    background: #100e11;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font: inherit;
+    font-size: 13px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: 1px solid var(--red-light);
+    border-color: var(--red-light);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.character-form button {
+    justify-self: start;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+@media (max-width: 600px) {
+    .registration {
+        padding: 20px;
+    }
+
+    .character-form button {
+        justify-self: stretch;
+        justify-content: center;
+    }
+}
+
+.character-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.character-card {
+    min-width: 0;
+    padding: 20px;
+    background: #100e11;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+
+.character-card h3 {
+    margin: 0 0 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+
+.character-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.character-card strong {
+    color: var(--text);
+}
+
+.character-id {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--red-light);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+    .character-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-message {
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    border-left: 4px solid #65b88b;
+    background: #1b2b22;
+    color: #d9ffe6;
+    font-size: 13px;
+}
+
+/* ===================================
+   ANTEIKU ARCHIVE - REFINAMENTO VISUAL
+=================================== */
+
+/* Transições gerais */
+.primary-button,
+.nav-link,
+.character-card,
+.form-group input,
+.form-group select,
+.form-group textarea {
+    transition: all 0.25s ease;
+}
+
+/* Botões */
+.primary-button {
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(181, 31, 54, 0.12);
+}
+
+.primary-button:hover {
+    background: var(--red-light);
+    border-color: #ff7585;
+    box-shadow: 0 5px 18px rgba(228, 75, 95, 0.25);
+    transform: translateY(-2px);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+/* Cartões de personagens */
+.character-card {
+    position: relative;
+    background:
+        linear-gradient(145deg, #171318, #100e11);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.character-card:hover {
+    border-color: #59303a;
+    border-left-color: var(--red-light);
+    box-shadow: 0 8px 24px rgba(181, 31, 54, 0.12);
+    transform: translateY(-3px);
+}
+
+/* Campos de formulário */
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #62404b;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--red-light);
+    box-shadow: 0 0 0 3px rgba(228, 75, 95, 0.10);
+}
+
+/* Painéis */
+.registration,
+.stat-card {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Navegação */
+.nav-link {
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Mensagens */
+.flash-message {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   CARTÕES DE PERSONAGENS - ANTEIKU
+=================================== */
+
+.character-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.character-label {
+    color: var(--red-light);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.character-id {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.character-card h3 {
+    color: var(--text);
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    margin-bottom: 16px;
+}
+
+.character-info {
+    margin-bottom: 20px;
+}
+
+.character-info p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.character-info strong {
+    color: var(--text);
+}
+
+.character-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.character-actions form {
+    margin: 0;
+}
+
+.character-actions .primary-button {
+    margin: 0;
+}
+
+/* ===================================
+   SELO DE CLASSIFICAÇÃO - ANTEIKU
+=================================== */
+
+.classification-area {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.classification-area strong {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.classification-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(181, 31, 54, 0.12);
+    border: 1px solid rgba(228, 75, 95, 0.4);
+    border-radius: 4px;
+    color: #e44b5f;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.character-header::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background: var(--red-light);
+}
+
+/* ===================================
+   ANTEIKU ARCHIVE - AJUSTES MOBILE
+=================================== */
+
+@media (max-width: 600px) {
+
+    .character-card {
+        padding: 16px;
+    }
+
+    .character-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .character-header .character-id {
+        margin-top: 0;
+    }
+
+    .character-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .character-actions a,
+    .character-actions form,
+    .character-actions button {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .character-actions form button {
+        display: block;
+    }
+}

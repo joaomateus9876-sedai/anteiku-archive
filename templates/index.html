@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anteiku Archive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">A</span>
+            <div>
+                <h2>ANTEIKU</h2>
+                <p>SISTEMA DE ARQUIVOS</p>
+            </div>
+        </div>
+
+        <p class="menu-label">MENU PRINCIPAL</p>
+
+        <nav>
+            <a class="nav-link active" href="/">⌂ &nbsp; Painel</a>
+            <a class="nav-link" href="#">▤ &nbsp; Arquivos</a>
+            <a class="nav-link" href="#">⌕ &nbsp; Investigações</a>
+            <a class="nav-link" href="#">⚙ &nbsp; Configurações</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span class="status-dot"></span>
+            SISTEMA OPERACIONAL
+        </div>
+    </aside>
+
+
+
+
+    <main class="main-content">
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        {% for categoria, mensagem in mensagens %}
+        <div class="flash-message {{ categoria }}">
+            {{ mensagem }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <header class="topbar">
+            <span class="classified">● ACESSO RESTRITO</span>
+            <span class="system-id">TOKYO / WARD 20</span>
+        </header>
+
+        <section class="welcome">
+            <p class="eyebrow">BANCO DE DADOS CONFIDENCIAL</p>
+            <h1>Bem-vindos a <span>Anteiku</span></h1>
+            <p class="description">
+                Todo segredo deixa um rastro.
+                Consulte os arquivos e acompanhe os registros
+                armazenados no sistema.
+            </p>
+            <a class="primary-button" href="#overview">
+                ACESSAR SISTEMA <span>→</span>
+            </a>
+        </section>
+
+        <section class="registration" id="cadastro">
+            <p class="eyebrow">ARQUIVO CONFIDENCIAL</p>
+            <h2>Cadastrar personagem</h2>
+            <p class="form-description">
+                Registre um novo indivíduo no banco de dados do Anteiku.
+            </p>
+
+            <form action="/cadastrar" method="POST" class="character-form">
+                <div class="form-group">
+                    <label for="nome">Nome do personagem</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex.: Ken Kaneki" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="especie">Espécie</label>
+                    <select id="especie" name="especie" required>
+                        <option value="">Selecione uma espécie</option>
+                        <option value="Humano">Humano</option>
+                        <option value="Ghoul">Ghoul</option>
+                        <option value="Meio-ghoul">Meio-ghoul</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="classificacao">Classificação</label>
+                    <input type="text" id="classificacao" name="classificacao" placeholder="Ex.: Classe especial">
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="4"
+                        placeholder="Informações sobre o personagem..."></textarea>
+                </div>
+
+                <button type="submit" class="primary-button">
+                    CADASTRAR PERSONAGEM
+                </button>
+            </form>
+        </section>
+
+
+
+        <section class="registration" id="arquivos">
+            <p class="eyebrow">BANCO DE DADOS</p>
+            <h2>Personagens registrados</h2>
+
+
+            <form action="{{ url_for('home') }}" method="GET" class="character-form"
+                style="margin-top: 20px; margin-bottom: 24px;">
+
+                <div class="form-group">
+                    <label for="busca">Pesquisar no arquivo</label>
+                    <input type="text" id="busca" name="busca" placeholder="Digite o nome de um personagem..."
+                        value="{{ request.args.get('busca', '') }}">
+                </div>
+
+                <button type="submit" class="primary-button">
+                    PESQUISAR
+                </button>
+
+                <a href="{{ url_for('home') }}" style="display: inline-block; margin-left: 12px;">
+                    Limpar pesquisa
+                </a>
+            </form>
+
+
+            {% if personagens %}
+            <div class="character-list">
+                {% for personagem in personagens %}
+                <article class="character-card">
+
+                    <div class="character-header">
+                        <span class="character-label">REGISTRO DE PERSONAGEM</span>
+                        <span class="character-id">
+                            ARQUIVO Nº {{ personagem["id"] }}
+                        </span>
+                    </div>
+
+                    <h3>{{ personagem["nome"] }}</h3>
+
+                    <div class="character-info">
+
+                        <p>
+                            <strong>Espécie:</strong>
+                            {{ personagem["especie"] }}
+                        </p>
+
+                        <p>
+                        <div class="classification-area">
+                            <strong>Classificação:</strong>
+
+                            <span class="classification-tag">
+                                {{ personagem["classificacao"] or "Não definida" }}
+                            </span>
+                        </div>
+                        </p>
+
+                        <p>
+                            <strong>Descrição:</strong>
+                            {{ personagem["descricao"] or "Sem descrição." }}
+                        </p>
+
+                    </div>
+
+                    <div class="character-actions">
+
+                        <a href="{{ url_for('editar', id=personagem['id']) }}" class="primary-button"
+                            style="display: inline-block; text-decoration: none;">
+                            EDITAR PERSONAGEM
+                        </a>
+
+                        <form action="{{ url_for('excluir', id=personagem['id']) }}" method="POST"
+                            onsubmit="return confirm('Tem certeza de que deseja excluir este personagem do arquivo?');">
+
+                            <button type="submit" class="primary-button"
+                                style="background-color: #7a2525; border-color: #a33a3a;">
+                                EXCLUIR PERSONAGEM
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="form-description">
+                Nenhum personagem registrado ainda.
+            </p>
+            {% endif %}
+        </section>
+
+
+
+        <section class="stats" id="overview">
+            <article class="stat-card">
+                <p>PERSONAGENS REGISTRADOS</p>
+                <h2>{{ total_personagens }}</h2>
+                <span>Arquivos no banco de dados</span>
+            </article>
+
+            <article class="stat-card">
+                <p>INVESTIGAÇÕES ATIVAS</p>
+                <h2>00</h2>
+                <span>Registros em acompanhamento</span>
+            </article>
+
+            <article class="stat-card">
+                <p>NÍVEL DE SEGURANÇA</p>
+                <h2 class="security">RESTRITO</h2>
+                <span>Acesso local autorizado</span>
+            </article>
+        </section>
+
+        <section class="notice">
+            <div class="notice-icon">!</div>
+            <div>
+                <h3>Arquivo central inicializado</h3>
+                <p>
+                    Bem-vindo ao sistema. A base de personagens
+                    será conectada nas próximas etapas do projeto.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            ARQUIVOS ANTEIKU © 2026 · PROJETO EM DESENVOLVIMENTO
+        </footer>
+    </main>
+</body>
+
+</html>
